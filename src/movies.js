@@ -46,6 +46,25 @@ function scoresAverage(movies) {
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesScore(movies) {
+  
+  let totalDramaScore = movies.reduce(function(acu, obj){
+    if(obj.genre.includes("Drama")){
+      return acu + obj.score
+    } else {
+      return 0
+    }
+  }, 0);
+	let onlyDrama = movies.map(function(obj){
+		if(obj.genre.includes("Drama")){
+			return obj
+		} else {
+			return 0
+		}
+	})
+  let avgOfDrama = totalDramaScore /onlyDrama.length
+  return Math.round (avgOfDrama * 100) / 100;
+
+  /*
   let totalDrama = movies.reduce(function(acu, obj){
     if(obj.genre.includes("Drama")){
       return acu + obj.score
@@ -55,6 +74,7 @@ function dramaMoviesScore(movies) {
   }, 0);
   let avgOfDrama = totalDrama / movies.length
   return Math.round (avgOfDrama * 100) / 100;
+  */
 }
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
@@ -77,15 +97,11 @@ function orderByYear(movies) {
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 function orderAlphabetically(movies) {
-  let sorMov = movies.sort(function compare(a, b){
-      if (a.title < b.title){
-        return -1
-      } else if (a.title > b.title){
-        return 1
-      }
-      return 0
-  });
-  return sorMov
+	let selectedMovies = movies.map(function(obj){
+		return obj.title
+	});
+	let sortedMovies = selectedMovies.sort()
+	return sortedMovies.slice(0, 20)
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
